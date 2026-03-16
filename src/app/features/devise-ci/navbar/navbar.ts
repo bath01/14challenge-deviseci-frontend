@@ -18,6 +18,7 @@ export class Navbar {
   @Output() pageChange = new EventEmitter<string>();
   @Output() darkModeToggle = new EventEmitter<void>();
 
+  isMenuOpen = false;
   navItems = [
     { key: 'converter', label: 'Convertir' },
     { key: 'rates', label: 'Taux en direct' },
@@ -32,5 +33,11 @@ export class Navbar {
   toggleDark(): void {
     this.darkModeToggle.emit();
   }
+
+
+
+toggleMenu(): void {
+  this.isMenuOpen = !this.isMenuOpen;
+}
 
 }

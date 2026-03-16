@@ -1,4 +1,4 @@
-/* ——— Layout ——— */
+
 .page-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -39,7 +39,6 @@
   margin: 0 0 32px;
 }
 
-/* ——— App Root ——— */
 .devise-app {
   font-family: 'DM Sans', sans-serif;
   min-height: 100vh;
@@ -48,7 +47,7 @@
   transition: background 0.3s, color 0.3s;
 }
 
-/* ——— Dark Mode ——— */
+
 .devise-app.dark {
   background: #111114;
   color: #F0EDE8;
@@ -111,7 +110,7 @@
 .devise-app.dark .about-footer-text { color: #8A8A8A; }
 .devise-app.dark .footer-brand span { color: #F0EDE8; }
 
-/* ——— Card ——— */
+
 .card {
   background: #fff;
   border-radius: 16px;
@@ -136,7 +135,7 @@
   margin: 0;
 }
 
-/* ——— Converter Grid ——— */
+
 .converter-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -155,7 +154,7 @@
   gap: 20px;
 }
 
-/* ——— Form Elements ——— */
+
 .field-group {
   margin-bottom: 16px;
 }
@@ -201,7 +200,7 @@
   box-sizing: border-box;
 }
 
-/* ——— Swap ——— */
+
 .swap-row {
   display: flex;
   justify-content: center;
@@ -227,7 +226,7 @@
 .swap-btn:hover { filter: brightness(1.05); }
 .swap-btn:active { transform: scale(0.97); }
 
-/* ——— Result Box ——— */
+
 .result-box {
   margin-top: 24px;
   padding: 24px;
@@ -258,7 +257,7 @@
   margin: 0;
 }
 
-/* ——— Action Row ——— */
+
 .action-row {
   display: flex;
   gap: 10px;
@@ -300,7 +299,7 @@
 .btn-ghost:hover { filter: brightness(0.97); }
 .btn-ghost:active { transform: scale(0.97); }
 
-/* ——— Chart Card ——— */
+
 .chart-card { padding: 24px; }
 
 .chart-header {
@@ -355,7 +354,7 @@
   text-align: right;
 }
 
-/* ——— Rates Card ——— */
+
 .rates-card { padding: 24px; }
 
 .rates-grid {
@@ -399,7 +398,7 @@
 
 .rate-value.orange { color: #FF8C00; }
 
-/* ——— Flag Badges ——— */
+
 .flag-badge {
   width: 22px;
   height: 15px;
@@ -440,7 +439,7 @@
   display: inline-block;
 }
 
-/* ——— History Preview ——— */
+
 .history-preview { margin-top: 0; }
 
 .history-preview-header {
@@ -493,7 +492,7 @@
 
 .history-date { font-size: 11px; color: #7A7A7A; margin: 0; }
 
-/* ——— Rates Page ——— */
+
 .rates-page-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -548,7 +547,7 @@
   background: rgba(255,140,0,0.5);
 }
 
-/* ——— History Page ——— */
+
 .history-list { display: flex; flex-direction: column; gap: 12px; }
 
 .history-row {
@@ -580,7 +579,7 @@
 
 .btn-redo:hover { filter: brightness(0.97); }
 
-/* ——— About Page ——— */
+
 .page-about { max-width: 800px; }
 
 .about-main { padding: 32px; margin-bottom: 20px; }
@@ -655,7 +654,7 @@
 .about-footer-text .orange { color: #FF8C00; font-weight: 600; }
 .about-footer-text .green { color: #009E49; font-weight: 600; }
 
-/* ——— Footer ——— */
+
 .devise-footer {
   border-top: 1px solid #E8E4DE;
   padding: 24px 48px;
@@ -695,3 +694,140 @@
 }
 
 .footer-copy { font-size: 11px; color: #7A7A7A; margin: 0; }
+
+
+
+@media (max-width: 768px) {
+
+
+  .devise-nav {
+    padding: 0 16px;
+  }
+
+  .devise-nav .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: rgba(245, 243, 239, 0.97);
+    border-bottom: 1px solid #E8E4DE;
+    padding: 16px;
+    gap: 0;
+    z-index: 99;
+  }
+
+  .devise-nav.dark .nav-links {
+    background: rgba(17, 17, 20, 0.97);
+    border-bottom-color: #2A2A2E;
+  }
+
+  .devise-nav .nav-links.open {
+    display: flex;
+  }
+
+  .devise-nav .nav-link {
+    padding: 12px 8px;
+    border-bottom: 1px solid #E8E4DE;
+    font-size: 15px;
+  }
+
+  .devise-nav.dark .nav-link {
+    border-bottom-color: #2A2A2E;
+  }
+
+  .devise-nav .nav-link:last-child {
+    border-bottom: none;
+  }
+
+  .hamburger {
+    display: flex !important;
+  }
+
+
+  .page-container {
+    padding: 24px 16px;
+  }
+
+
+  .converter-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .main-card {
+    grid-row: auto;
+  }
+
+  .right-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .action-row {
+    flex-wrap: wrap;
+  }
+
+  .btn-save {
+    width: 100%;
+  }
+
+  .result-value {
+    font-size: 28px;
+  }
+
+
+  .rates-page-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .history-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .history-row-left {
+    gap: 12px;
+  }
+
+  .btn-redo {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+  }
+
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-about {
+    max-width: 100%;
+  }
+
+
+  .devise-footer {
+    padding: 16px;
+  }
+}
+
+
+
+@media (max-width: 1024px) and (min-width: 769px) {
+
+  .converter-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .rates-page-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .page-container {
+    padding: 32px 24px;
+  }
+}

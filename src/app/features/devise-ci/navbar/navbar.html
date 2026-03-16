@@ -9,14 +9,11 @@
     </div>
 
     <!-- Liens -->
-    <div class="nav-links">
+    <div class="nav-links" [class.open]="isMenuOpen">
       @for (item of navItems; track item.key) {
-        <span
-          class="nav-link"
-          [class.active]="currentPage === item.key"
-          (click)="navigate(item.key)">
-          {{ item.label }}
-        </span>
+      <span class="nav-link" [class.active]="currentPage === item.key" (click)="navigate(item.key);  isMenuOpen = false">
+        {{ item.label }}
+      </span>
       }
 
       <!-- Toggle dark mode -->
@@ -24,6 +21,12 @@
         {{ darkMode ? '☀' : '☾' }}
       </button>
     </div>
+
+    <button class="hamburger" (click)="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
   </div>
 </nav>

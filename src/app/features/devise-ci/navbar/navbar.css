@@ -1,4 +1,3 @@
-/* ——— Navbar ——— */
 .devise-nav {
   position: sticky;
   top: 0;
@@ -16,7 +15,6 @@
   border-bottom-color: #2A2A2E;
 }
 
-/* ——— Nav Inner ——— */
 .devise-nav .nav-inner {
   max-width: 1200px;
   margin: 0 auto;
@@ -24,9 +22,9 @@
   justify-content: space-between;
   align-items: center;
   height: 60px;
+  position: relative;
 }
 
-/* ——— Nav Brand ——— */
 .devise-nav .nav-brand {
   display: flex;
   align-items: center;
@@ -71,9 +69,9 @@
   font-family: 'DM Sans', sans-serif;
 }
 
-/* ——— Nav Links ——— */
 .devise-nav .nav-links {
   display: flex;
+  flex-direction: row;
   gap: 28px;
   align-items: center;
 }
@@ -99,7 +97,6 @@
   color: #FF8C00;
 }
 
-/* ——— Dark Toggle ——— */
 .devise-nav .dark-toggle {
   width: 34px;
   height: 34px;
@@ -122,3 +119,77 @@
 
 .devise-nav .dark-toggle:hover { filter: brightness(1.05); }
 .devise-nav .dark-toggle:active { transform: scale(0.97); }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+}
+
+.hamburger span {
+  width: 22px;
+  height: 2px;
+  background: #1A1A1A;
+  border-radius: 2px;
+  transition: all 0.3s;
+  display: block;
+}
+
+.devise-nav.dark .hamburger span {
+  background: #F0EDE8;
+}
+
+@media (max-width: 768px) {
+
+  .devise-nav {
+    padding: 0 16px;
+    position: relative;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .devise-nav .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: rgba(245, 243, 239, 0.97);
+    border-bottom: 1px solid #E8E4DE;
+    padding: 8px 24px 16px;
+    gap: 0;
+    z-index: 999;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  }
+
+  .devise-nav .nav-links.open {
+    display: flex;
+  }
+
+  .devise-nav.dark .nav-links {
+    background: rgba(17, 17, 20, 0.97);
+    border-bottom-color: #2A2A2E;
+  }
+
+  .devise-nav .nav-link {
+    padding: 14px 0;
+    border-bottom: 1px solid #E8E4DE;
+    font-size: 15px;
+    width: 100%;
+  }
+
+  .devise-nav.dark .nav-link {
+    border-bottom-color: #2A2A2E;
+  }
+
+  .devise-nav .dark-toggle {
+    margin-top: 12px;
+  }
+}
