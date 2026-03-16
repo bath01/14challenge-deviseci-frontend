@@ -69,7 +69,7 @@
 .devise-app.dark .result-box { background: rgba(255,140,0,0.1); }
 .devise-app.dark .rate-item { background: #222228; }
 .devise-app.dark .rate-item.selected { background: rgba(255,140,0,0.1); }
-.devise-app.dark .history-mini-card { background: #222228; }
+.devise-app.dark .history-mini-card { background: #222228; box-shadow: 4px 4px 12px rgba(0,0,0,0.4); }
 .devise-app.dark .stack-item { background: #222228; }
 .devise-app.dark .dark-toggle { background: #2A2A2E; }
 .devise-app.dark .page-title { color: #F0EDE8; }
@@ -440,7 +440,7 @@
 }
 
 
-.history-preview { margin-top: 0; }
+.history-preview { margin-top: 20px; }
 
 .history-preview-header {
   display: flex;
@@ -458,20 +458,77 @@
 
 .link-orange:hover { text-decoration: underline; }
 
-.history-scroll {
+/* .history-scroll {
   display: flex;
   gap: 12px;
   overflow-x: auto;
   padding-bottom: 4px;
+} */
+
+.history-scroll {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
 }
 
-.history-mini-card {
+/* .history-mini-card {
   min-width: 200px;
   padding: 14px 16px;
   border-radius: 12px;
   background: #F7F5F0;
   box-shadow: 4px 4px 12px rgba(0,0,0,0.06), -2px -2px 8px rgba(255,255,255,0.8);
   flex-shrink: 0;
+} */
+
+.history-mini-card {
+  padding: 16px;
+  border-radius: 12px;
+  background: #F7F5F0;
+  box-shadow: 4px 4px 12px rgba(0,0,0,0.06), -2px -2px 8px rgba(255,255,255,0.8);
+}
+
+.history-mini-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.history-mini-amount {
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  color: #1A1A1A;
+}
+
+.devise-app.dark .history-mini-amount {
+  color: #F0EDE8;
+}
+.history-mini-result {
+  font-size: 16px;
+  font-weight: 700;
+  color: #FF8C00;
+  margin: 0 0 6px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.history-mini-date {
+  font-size: 11px;
+  color: #7A7A7A;
+  margin: 0;
+  font-family: 'DM Sans', sans-serif;
+}
+
+@media (max-width: 768px) {
+  .history-scroll {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .history-scroll {
+    grid-template-columns: 1fr;
+  }
 }
 
 .history-from {

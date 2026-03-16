@@ -55,7 +55,7 @@
   transition: color 0.3s;
 }
 
-.devise-nav.dark .brand-name {
+.devise-nav.dark .nav-brand .brand-name {
   color: #F0EDE8;
 }
 
@@ -175,7 +175,7 @@
 
   .devise-nav.dark .nav-links {
     background: rgba(17, 17, 20, 0.97);
-    border-bottom-color: #2A2A2E;
+    border-bottom-color: #ededf1;
   }
 
   .devise-nav .nav-link {
@@ -186,7 +186,7 @@
   }
 
   .devise-nav.dark .nav-link {
-    border-bottom-color: #2A2A2E;
+    border-bottom-color: #fbfbff;
   }
 
   .devise-nav .dark-toggle {

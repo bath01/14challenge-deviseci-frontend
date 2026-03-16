@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #F5F3EF;
+}
+
+/* Quand dark mode est actif sur .devise-app,
+   on change aussi le fond du body */
+body:has(.devise-app.dark) {
+  background: #111114;
+}

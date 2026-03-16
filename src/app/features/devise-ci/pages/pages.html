@@ -1,257 +1,248 @@
 <div class="devise-app" [class.dark]="darkMode">
 
-
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-
-  <app-navbar
-    [currentPage]="page"
-    [darkMode]="darkMode"
-    (pageChange)="page = $event"
+  <app-navbar [currentPage]="page" [darkMode]="darkMode" (pageChange)="page = $event"
     (darkModeToggle)="darkMode = !darkMode">
   </app-navbar>
 
-
   @if (page === 'converter') {
-    <div class="page-container">
+  <div class="page-container">
 
-      <div class="page-header">
-        <h1>Convertissez en <span class="accent">temps réel</span></h1>
-        <p>Taux de change actualisés pour les devises mondiales majeures</p>
-      </div>
-
-      <div class="converter-grid">
-
-
-        <div class="card main-card">
-
-
-          <div class="field-group">
-            <label class="field-label">De</label>
-            <select class="styled-select" [(ngModel)]="fromCurrency" name="from">
-              @for (c of currencies; track c.code) {
-                <option [value]="c.code">{{ c.code }} - {{ c.name }}</option>
-              }
-            </select>
-          </div>
-
-
-          <div class="field-group">
-            <label class="field-label">Montant</label>
-            <input class="amount-input" type="text" [value]="amount"
-              (input)="sanitizeAmount($any($event.target).value)" />
-          </div>
-
-
-          <div class="swap-row">
-            <button class="swap-btn" (click)="swap()">⇅</button>
-          </div>
-
-
-          <div class="field-group">
-            <label class="field-label">Vers</label>
-            <select class="styled-select" [(ngModel)]="toCurrency" name="to">
-              @for (c of currencies; track c.code) {
-                <option [value]="c.code">{{ c.code }} - {{ c.name }}</option>
-              }
-            </select>
-          </div>
-
-
-          <div class="result-box">
-            <p class="result-label">Résultat</p>
-            <p class="result-value">{{ toC.symbol }} {{ formatNum(converted) }}</p>
-            <p class="result-rate">1 {{ fromCurrency }} = {{ formatNum(rate) }} {{ toCurrency }}</p>
-          </div>
-
-
-          <div class="action-row">
-            <button class="btn-save" (click)="saveToHistory()">Sauvegarder</button>
-            <button class="btn-ghost" (click)="copyResult()">{{ copied ? 'Copié !' : 'Copier' }}</button>
-            <button class="btn-ghost">Partager</button>
-          </div>
-
-        </div>
-
-
-        <div class="right-col">
-
-
-          <div class="card chart-card">
-            <div class="chart-header">
-              <div>
-                <p class="card-sublabel">Taux du jour</p>
-                <div class="pair-display">
-                  <div class="flag-badge" [style.background]="'linear-gradient(90deg, ' + getFlagColors(fromC.flag)[0] + ' 33%, ' + getFlagColors(fromC.flag)[1] + ' 33% 66%, ' + getFlagColors(fromC.flag)[2] + ' 66%)'"></div>
-                  {{ fromCurrency }}
-                  <span class="arrow">→</span>
-                  <div class="flag-badge" [style.background]="'linear-gradient(90deg, ' + getFlagColors(toC.flag)[0] + ' 33%, ' + getFlagColors(toC.flag)[1] + ' 33% 66%, ' + getFlagColors(toC.flag)[2] + ' 66%)'"></div>
-                  {{ toCurrency }}
-                </div>
-              </div>
-              <span class="badge-green">+0.12%</span>
-            </div>
-            <div class="mini-chart">
-              @for (bar of miniChartBars; track $index) {
-                <div class="bar" [class.active]="$index === 14"
-                  [style.height]="bar + '%'"></div>
-              }
-            </div>
-            <p class="chart-legend">15 dernières heures</p>
-          </div>
-
-
-          <div class="card rates-card">
-            <p class="card-sublabel">Taux populaires (base {{ fromCurrency }})</p>
-            <div class="rates-grid">
-              @for (c of otherCurrencies; track c.code) {
-                <div class="rate-item" [class.selected]="toCurrency === c.code"
-                  (click)="selectToCurrency(c.code)">
-                  <div class="rate-left">
-                    <div class="flag-badge-sm" [style.background]="'linear-gradient(90deg, ' + getFlagColors(c.flag)[0] + ' 33%, ' + getFlagColors(c.flag)[1] + ' 33% 66%, ' + getFlagColors(c.flag)[2] + ' 66%)'"></div>
-                    <span class="rate-code">{{ c.code }}</span>
-                  </div>
-                  <span class="rate-value" [class.orange]="toCurrency === c.code">
-                    {{ formatNum(c.rate / fromC.rate) }}
-                  </span>
-                </div>
-              }
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Dernières conversions -->
-      <div class="card history-preview">
-        <div class="history-preview-header">
-          <p class="card-title">Dernières conversions</p>
-          <span class="link-orange" (click)="page = 'history'">Voir tout →</span>
-        </div>
-        <div class="history-scroll">
-          @for (h of convHistory.slice(0, 4); track $index) {
-            <div class="history-mini-card">
-              <p class="history-from">
-                <span class="flag-dot" [style.background]="getFlagColors(getFlagForCode(h.from))[0]"></span>
-                {{ h.amount | number:'1.0-0' }} {{ h.from }}
-              </p>
-              <p class="history-to">→ {{ h.result | number:'1.2-2' }} {{ h.to }}</p>
-              <p class="history-date">{{ h.date }}</p>
-            </div>
-          }
-        </div>
-      </div>
-
+    <div class="page-header">
+      <h1>Convertissez en <span class="accent">temps réel</span></h1>
+      <p>Taux de change actualisés pour les devises mondiales majeures</p>
     </div>
+
+    <div class="converter-grid">
+
+      <div class="card main-card">
+
+        <div class="field-group">
+          <label class="field-label">De</label>
+          <select class="styled-select" [(ngModel)]="fromCurrency" name="from">
+            @for (c of currencies; track c.code) {
+            <option [value]="c.code">{{ c.code }} - {{ c.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Montant</label>
+          <input class="amount-input" type="text" [value]="amount"
+            (input)="sanitizeAmount($any($event.target).value)" />
+        </div>
+
+        <div class="swap-row">
+          <button class="swap-btn" (click)="swap()">⇅</button>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Vers</label>
+          <select class="styled-select" [(ngModel)]="toCurrency" name="to">
+            @for (c of currencies; track c.code) {
+            <option [value]="c.code">{{ c.code }} - {{ c.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="result-box">
+          <p class="result-label">Résultat</p>
+          <p class="result-value">{{ toC.symbol }} {{ formatNum(converted) }}</p>
+          <p class="result-rate">1 {{ fromCurrency }} = {{ formatNum(rate) }} {{ toCurrency }}</p>
+        </div>
+
+        <div class="action-row">
+          <button class="btn-save" (click)="saveToHistory()">Sauvegarder</button>
+          <button class="btn-ghost" (click)="copyResult()">{{ copied ? 'Copié !' : 'Copier' }}</button>
+          <button class="btn-ghost">Partager</button>
+        </div>
+
+      </div>
+
+      <div class="right-col">
+
+        <div class="card chart-card">
+          <div class="chart-header">
+            <div>
+              <p class="card-sublabel">Taux du jour</p>
+              <div class="pair-display">
+                <div class="flag-badge"
+                  [style.background]="'linear-gradient(90deg, ' + getFlagColors(fromC.flag)[0] + ' 33%, ' + getFlagColors(fromC.flag)[1] + ' 33% 66%, ' + getFlagColors(fromC.flag)[2] + ' 66%)'">
+                </div>
+                {{ fromCurrency }}
+                <span class="arrow">→</span>
+                <div class="flag-badge"
+                  [style.background]="'linear-gradient(90deg, ' + getFlagColors(toC.flag)[0] + ' 33%, ' + getFlagColors(toC.flag)[1] + ' 33% 66%, ' + getFlagColors(toC.flag)[2] + ' 66%)'">
+                </div>
+                {{ toCurrency }}
+              </div>
+            </div>
+            <span class="badge-green">+0.12%</span>
+          </div>
+          <div class="mini-chart">
+            @for (bar of miniChartBars; track $index) {
+            <div class="bar" [class.active]="$index === 14" [style.height]="bar + '%'"></div>
+            }
+          </div>
+          <p class="chart-legend">15 dernières heures</p>
+        </div>
+
+        <div class="card rates-card">
+          <p class="card-sublabel">Taux populaires (base {{ fromCurrency }})</p>
+          <div class="rates-grid">
+            @for (c of otherCurrencies; track c.code) {
+            <div class="rate-item" [class.selected]="toCurrency === c.code" (click)="selectToCurrency(c.code)">
+              <div class="rate-left">
+                <div class="flag-badge-sm"
+                  [style.background]="'linear-gradient(90deg, ' + getFlagColors(c.flag)[0] + ' 33%, ' + getFlagColors(c.flag)[1] + ' 33% 66%, ' + getFlagColors(c.flag)[2] + ' 66%)'">
+                </div>
+                <span class="rate-code">{{ c.code }}</span>
+              </div>
+              <span class="rate-value" [class.orange]="toCurrency === c.code">
+                {{ formatNum(c.rate / fromC.rate) }}
+              </span>
+            </div>
+            }
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card history-preview">
+      <div class="history-preview-header">
+        <p class="card-title">Dernières conversions</p>
+        <span class="link-orange" (click)="page = 'history'">Voir tout →</span>
+      </div>
+      <div class="history-scroll">
+        @for (h of convHistory.slice(0, 4); track $index) {
+        <div class="history-mini-card">
+          <div class="history-mini-top">
+            <span class="flag-dot" [style.background]="getFlagColors(getFlagForCode(h.from))[0]"></span>
+            <span class="history-mini-amount">{{ h.amount | number:'1.0-0' }} {{ h.from }}</span>
+          </div>
+          <p class="history-mini-result">→ {{ h.result | number:'1.2-2' }} {{ h.to }}</p>
+          <p class="history-mini-date">{{ h.date }}</p>
+        </div>
+        }
+      </div>
+    </div>
+
+  </div>
   }
 
-  <!-- ===== PAGE RATES ===== -->
   @if (page === 'rates') {
-    <div class="page-container">
-      <h2 class="page-title">Taux en direct</h2>
-      <p class="page-subtitle">Base : 1 XOF (Franc CFA)</p>
-      <div class="rates-page-grid">
-        @for (c of ratesCurrencies; track c.code) {
-          <div class="card rate-full-card" (click)="fromCurrency='XOF'; toCurrency=c.code; page='converter'">
-            <div class="rate-card-header">
-              <div class="rate-card-left">
-                <div class="flag-badge-lg" [style.background]="'linear-gradient(90deg, ' + getFlagColors(c.flag)[0] + ' 33%, ' + getFlagColors(c.flag)[1] + ' 33% 66%, ' + getFlagColors(c.flag)[2] + ' 66%)'"></div>
-                <div>
-                  <p class="rate-card-code">{{ c.code }}</p>
-                  <p class="rate-card-name">{{ c.name }}</p>
-                </div>
-              </div>
-              <span class="badge-change badge-green">+0.12%</span>
+  <div class="page-container">
+    <h2 class="page-title">Taux en direct</h2>
+    <p class="page-subtitle">Base : 1 XOF (Franc CFA)</p>
+    <div class="rates-page-grid">
+      @for (c of ratesCurrencies; track c.code) {
+      <div class="card rate-full-card" (click)="fromCurrency='XOF'; toCurrency=c.code; page='converter'">
+        <div class="rate-card-header">
+          <div class="rate-card-left">
+            <div class="flag-badge-lg"
+              [style.background]="'linear-gradient(90deg, ' + getFlagColors(c.flag)[0] + ' 33%, ' + getFlagColors(c.flag)[1] + ' 33% 66%, ' + getFlagColors(c.flag)[2] + ' 66%)'">
             </div>
-            <div class="rate-card-body">
-              <div>
-                <p class="rate-card-label">1 XOF =</p>
-                <p class="rate-card-value">{{ c.symbol }} {{ formatNum(c.rate) }}</p>
-              </div>
-              <div class="sparkline">
-                @for (bar of getRandomBars(); track $index) {
-                  <div class="spark-bar" [style.height]="(20 + bar * 0.6) + '%'"></div>
-                }
-              </div>
+            <div>
+              <p class="rate-card-code">{{ c.code }}</p>
+              <p class="rate-card-name">{{ c.name }}</p>
             </div>
           </div>
-        }
+          <span class="badge-change badge-green">+0.12%</span>
+        </div>
+        <div class="rate-card-body">
+          <div>
+            <p class="rate-card-label">1 XOF =</p>
+            <p class="rate-card-value">{{ c.symbol }} {{ formatNum(c.rate) }}</p>
+          </div>
+          <div class="sparkline">
+            @for (bar of getRandomBars(); track $index) {
+            <div class="spark-bar" [style.height]="(20 + bar * 0.6) + '%'"></div>
+            }
+          </div>
+        </div>
       </div>
+      }
     </div>
+  </div>
   }
 
-  <!-- ===== PAGE HISTORY ===== -->
   @if (page === 'history') {
-    <div class="page-container">
-      <h2 class="page-title">Historique</h2>
-      <p class="page-subtitle">{{ convHistory.length }} conversion{{ convHistory.length > 1 ? 's' : '' }} enregistrée{{ convHistory.length > 1 ? 's' : '' }}</p>
-      <div class="history-list">
-        @for (h of convHistory; track $index) {
-          <div class="card history-row">
-            <div class="history-row-left">
-              <div class="flag-icon" [style.background]="'linear-gradient(90deg, ' + getFlagColors(getFlagForCode(h.from))[0] + ' 33%, ' + getFlagColors(getFlagForCode(h.from))[1] + ' 33% 66%, ' + getFlagColors(getFlagForCode(h.from))[2] + ' 66%)'"></div>
-              <div>
-                <p class="history-row-main">{{ h.amount | number:'1.0-0' }} {{ h.from }} → {{ h.result | number:'1.2-2' }} {{ h.to }}</p>
-                <p class="history-row-date">{{ h.date }}</p>
-              </div>
-            </div>
-            <button class="btn-redo" (click)="redoConversion(h)">Refaire</button>
+  <div class="page-container">
+    <h2 class="page-title">Historique</h2>
+    <p class="page-subtitle">{{ convHistory.length }} conversion{{ convHistory.length > 1 ? 's' : '' }} enregistrée{{
+      convHistory.length > 1 ? 's' : '' }}</p>
+    <div class="history-list">
+      @for (h of convHistory; track $index) {
+      <div class="card history-row">
+        <div class="history-row-left">
+          <div class="flag-icon"
+            [style.background]="'linear-gradient(90deg, ' + getFlagColors(getFlagForCode(h.from))[0] + ' 33%, ' + getFlagColors(getFlagForCode(h.from))[1] + ' 33% 66%, ' + getFlagColors(getFlagForCode(h.from))[2] + ' 66%)'">
           </div>
+          <div>
+            <p class="history-row-main">{{ h.amount | number:'1.0-0' }} {{ h.from }} → {{ h.result | number:'1.2-2' }}
+              {{ h.to }}</p>
+            <p class="history-row-date">{{ h.date }}</p>
+          </div>
+        </div>
+        <button class="btn-redo" (click)="redoConversion(h)">Refaire</button>
+      </div>
+      }
+    </div>
+  </div>
+  }
+
+  @if (page === 'about') {
+  <div class="page-container page-about">
+    <h2 class="page-title">A propos</h2>
+    <p class="page-subtitle">Le projet DeviseCI</p>
+
+    <div class="card about-main">
+      <div class="ci-flag-strip">
+        <div style="background: #FF8C00;"></div>
+        <div style="background: #FFF;"></div>
+        <div style="background: #009E49;"></div>
+      </div>
+      <h3 class="about-title">Pourquoi DeviseCI ?</h3>
+      <p class="about-text">Jour 2 du Challenge 14-14-14. DeviseCI est un convertisseur de devises moderne pour
+        convertir facilement entre les devises mondiales, avec le Franc CFA (XOF) au cœur de l'expérience.</p>
+      <p class="about-text">Le design s'inspire du style Bento Grid et Soft UI (tendance fintech 2025-2026), avec les
+        couleurs de la Côte d'Ivoire intégrées subtilement.</p>
+    </div>
+
+    <div class="about-grid">
+      <div class="card">
+        <p class="card-sublabel">L'équipe</p>
+        @for (m of teamMembers; track m.name) {
+        <div class="team-member">
+          <div class="team-avatar">{{ getInitials(m.name) }}</div>
+          <div>
+            <p class="team-name">{{ m.name }}</p>
+            <p class="team-role">{{ m.role }}</p>
+          </div>
+        </div>
+        }
+      </div>
+      <div class="card">
+        <p class="card-sublabel">Stack technique</p>
+        @for (t of stackItems; track t.tech) {
+        <div class="stack-item">
+          <span class="stack-tech">{{ t.tech }}</span>
+          <span class="stack-type">{{ t.type }}</span>
+        </div>
         }
       </div>
     </div>
-  }
 
-  <!-- ===== PAGE ABOUT ===== -->
-  @if (page === 'about') {
-    <div class="page-container page-about">
-      <h2 class="page-title">A propos</h2>
-      <p class="page-subtitle">Le projet DeviseCI</p>
-
-      <div class="card about-main">
-        <div class="ci-flag-strip">
-          <div style="background: #FF8C00;"></div>
-          <div style="background: #FFF;"></div>
-          <div style="background: #009E49;"></div>
-        </div>
-        <h3 class="about-title">Pourquoi DeviseCI ?</h3>
-        <p class="about-text">Jour 2 du Challenge 14-14-14. DeviseCI est un convertisseur de devises moderne pour convertir facilement entre les devises mondiales, avec le Franc CFA (XOF) au cœur de l'expérience.</p>
-        <p class="about-text">Le design s'inspire du style Bento Grid et Soft UI (tendance fintech 2025-2026), avec les couleurs de la Côte d'Ivoire intégrées subtilement.</p>
-      </div>
-
-      <div class="about-grid">
-        <div class="card">
-          <p class="card-sublabel">L'équipe</p>
-          @for (m of teamMembers; track m.name) {
-            <div class="team-member">
-              <div class="team-avatar">{{ getInitials(m.name) }}</div>
-              <div>
-                <p class="team-name">{{ m.name }}</p>
-                <p class="team-role">{{ m.role }}</p>
-              </div>
-            </div>
-          }
-        </div>
-        <div class="card">
-          <p class="card-sublabel">Stack technique</p>
-          @for (t of stackItems; track t.tech) {
-            <div class="stack-item">
-              <span class="stack-tech">{{ t.tech }}</span>
-              <span class="stack-type">{{ t.type }}</span>
-            </div>
-          }
-        </div>
-      </div>
-
-      <div class="card about-footer-card">
-        <p class="about-footer-text">
-          Open Source sur <span class="orange">225os.com</span> & <span class="green">GitHub</span>
-        </p>
-      </div>
+    <div class="card about-footer-card">
+      <p class="about-footer-text">
+        Open Source sur <span class="orange">225os.com</span> & <span class="green">GitHub</span>
+      </p>
     </div>
+  </div>
   }
 
-  <!-- Footer -->
   <footer class="devise-footer" [class.dark]="darkMode">
     <div class="footer-inner">
       <div class="footer-brand">
