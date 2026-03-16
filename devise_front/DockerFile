@@ -1,0 +1,30 @@
+# Étape 1 — Build de l'app Angular
+FROM node:20-alpine AS build
+
+# Dossier de travail dans le conteneur
+WORKDIR /app
+
+# Copie les fichiers de dépendances en premier
+# (optimisation cache Docker — si package.json ne change pas, npm install est mis en cache)
+COPY package*.json ./
+
+# Installation des dépendances
+RUN npm install
+
+# Copie tout le reste du code source
+COPY . .
+
+# Build de production Angular
+RUN npm run build --configuration=production
+
+# Étape 2 — Serveur Nginx pour servir l'app
+FROM nginx:alpine
+
+# Copie le build Angular vers le dossier servi par Nginx
+COPY --from=build /app/dist/devise_front/browser /usr/share/nginx/html
+
+# Expose le port 80
+EXPOSE 80
+
+# Démarre Nginx
+CMD ["nginx", "-g", "daemon off;"]
