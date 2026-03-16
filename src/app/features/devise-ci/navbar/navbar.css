@@ -1,0 +1,124 @@
+/* ——— Navbar ——— */
+.devise-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(245, 243, 239, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid #E8E4DE;
+  padding: 0 48px;
+  transition: all 0.3s;
+}
+
+.devise-nav.dark {
+  background: rgba(17, 17, 20, 0.92);
+  border-bottom-color: #2A2A2E;
+}
+
+/* ——— Nav Inner ——— */
+.devise-nav .nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+
+/* ——— Nav Brand ——— */
+.devise-nav .nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.devise-nav .nav-brand .brand-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #FF8C00, #009E49);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.devise-nav .nav-brand .brand-name {
+  font-size: 18px;
+  font-weight: 700;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: -0.5px;
+  color: #1A1A1A;
+  transition: color 0.3s;
+}
+
+.devise-nav.dark .brand-name {
+  color: #F0EDE8;
+}
+
+.devise-nav .nav-brand .brand-badge {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(0, 158, 73, 0.1);
+  color: #009E49;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* ——— Nav Links ——— */
+.devise-nav .nav-links {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+
+.devise-nav .nav-link {
+  font-size: 13px;
+  font-weight: 400;
+  cursor: pointer;
+  color: #7A7A7A;
+  font-family: 'DM Sans', sans-serif;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 2px;
+  transition: all 0.2s;
+}
+
+.devise-nav .nav-link.active {
+  font-weight: 600;
+  color: #FF8C00;
+  border-bottom-color: #FF8C00;
+}
+
+.devise-nav .nav-link:hover {
+  color: #FF8C00;
+}
+
+/* ——— Dark Toggle ——— */
+.devise-nav .dark-toggle {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: #E8E4DE;
+  font-size: 14px;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 4px 4px 12px rgba(0,0,0,0.06), -2px -2px 8px rgba(255,255,255,0.8);
+}
+
+.devise-nav.dark .dark-toggle {
+  background: #2A2A2E;
+  box-shadow: 4px 4px 12px rgba(0,0,0,0.4), -2px -2px 8px rgba(255,255,255,0.03);
+}
+
+.devise-nav .dark-toggle:hover { filter: brightness(1.05); }
+.devise-nav .dark-toggle:active { transform: scale(0.97); }

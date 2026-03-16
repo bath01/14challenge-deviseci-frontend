@@ -1,0 +1,29 @@
+<nav class="devise-nav" [class.dark]="darkMode">
+  <div class="nav-inner">
+
+    <!-- Logo -->
+    <div class="nav-brand" (click)="navigate('converter')">
+      <div class="brand-icon">D</div>
+      <span class="brand-name">DeviseCI</span>
+      <span class="brand-badge">v1.0</span>
+    </div>
+
+    <!-- Liens -->
+    <div class="nav-links">
+      @for (item of navItems; track item.key) {
+        <span
+          class="nav-link"
+          [class.active]="currentPage === item.key"
+          (click)="navigate(item.key)">
+          {{ item.label }}
+        </span>
+      }
+
+      <!-- Toggle dark mode -->
+      <button class="dark-toggle" (click)="toggleDark()">
+        {{ darkMode ? '☀' : '☾' }}
+      </button>
+    </div>
+
+  </div>
+</nav>
