@@ -71,7 +71,10 @@
         <div class="action-row">
           <button class="btn-save" (click)="saveToHistory()">Sauvegarder</button>
           <button class="btn-ghost" (click)="copyResult()">{{ copied ? 'Copié !' : 'Copier' }}</button>
-          <button class="btn-ghost">Partager</button>
+          <!-- <button class="btn-ghost">Partager</button> -->
+          <button class="btn-ghost" (click)="share()">
+            {{ showShareCopied ? 'Lien copié !' : 'Partager' }}
+          </button>
         </div>
 
       </div>

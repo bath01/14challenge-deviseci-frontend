@@ -37,6 +37,7 @@ export class Pages implements OnInit {
   isLoadingRates = false;
   isLoadingConversion = false;
   dataLoaded = false;
+  showShareCopied = false;
 
   private symbolMap: {[key: string]: string} = {
     XOF: 'CFA', EUR: '€', USD: '$', GBP: '£', NGN: '₦',
@@ -341,6 +342,26 @@ export class Pages implements OnInit {
     this.convertedRate = null;
     this.convertViaApi();
   }
+
+  share(): void {
+  const text = `${this.amount} ${this.fromCurrency} = ${this.formatNum(this.converted)} ${this.toCurrency} 💱\nConverti avec DeviseCI — https://deviseci.chalenge14.com`;
+
+
+  if (navigator.share) {
+    navigator.share({
+      title: 'DeviseCI — Conversion',
+      text: text,
+      url: window.location.href
+    }).catch(() => {
+
+    });
+  } else {
+    
+    navigator.clipboard?.writeText?.(text);
+    this.showShareCopied = true;
+    setTimeout(() => this.showShareCopied = false, 2000);
+  }
+}
 
   swap(): void {
     const tmp = this.fromCurrency;
